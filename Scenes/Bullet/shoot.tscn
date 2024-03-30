@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://csra51xarmw1o"]
+
+[ext_resource type="Script" path="res://Scenes/Bullet/bullet.gd" id="1_u2rcx"]
+
+[sub_resource type="Gradient" id="Gradient_2m4mj"]
+offsets = PackedFloat32Array(0, 0.466851, 0.839779)
+colors = PackedColorArray(1, 0.156863, 0, 1, 1, 0.803922, 0, 1, 1, 1, 0.807843, 0.619608)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_03khp"]
+gradient = SubResource("Gradient_2m4mj")
+
+[sub_resource type="Curve" id="Curve_s852c"]
+max_value = 3.0
+_data = [Vector2(0, 1.61811), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y8l21"]
+curve = SubResource("Curve_s852c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qxs7p"]
+particle_flag_disable_z = true
+angular_velocity_min = 647.73
+angular_velocity_max = 647.73
+gravity = Vector3(0, -98, 0)
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_y8l21")
+color_ramp = SubResource("GradientTexture1D_03khp")
+turbulence_enabled = true
+turbulence_noise_scale = 1.047
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rn1vh"]
+radius = 5.0
+height = 12.0
+
+[node name="Shoot" type="RigidBody2D"]
+mass = 200.0
+gravity_scale = 0.0
+script = ExtResource("1_u2rcx")
+
+[node name="BurstTimer" type="Timer" parent="."]
+wait_time = 0.001
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 1)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_qxs7p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_rn1vh")
+
+[connection signal="timeout" from="BurstTimer" to="." method="_on_burst_timer_timeout"]

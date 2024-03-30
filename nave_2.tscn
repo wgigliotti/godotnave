@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwghivgirvhhp"]
+
+[ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://player.tscn" id="1_fkx52"]
+[ext_resource type="PackedScene" uid="uid://d2uvxqjtah37q" path="res://bullet.tscn" id="2_rt75s"]
+
+[node name="Inimigo" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_fkx52")]
+bullet_scene = ExtResource("2_rt75s")
+left = "p1_left"
+right = "p1_right"
+shoot_key = "p1_shoot"

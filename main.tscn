@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cddetetpqv8kb"]
+
+[ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://player.tscn" id="1_3wqaw"]
+[ext_resource type="PackedScene" uid="uid://d2uvxqjtah37q" path="res://bullet.tscn" id="2_o7l6p"]
+[ext_resource type="PackedScene" uid="uid://cwghivgirvhhp" path="res://nave_2.tscn" id="3_gg3o3"]
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_3wqaw")]
+position = Vector2(297, 238)
+bullet_scene = ExtResource("2_o7l6p")
+left = "p2_left"
+right = "p2_right"
+shoot_key = "p2_shoot"
+
+[node name="Nave2" parent="." instance=ExtResource("3_gg3o3")]
+position = Vector2(978, 237)

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2uvxqjtah37q"]
+
+[ext_resource type="Texture2D" uid="uid://nb7ycw6bjt44" path="res://arts/missil.png" id="1_7t6jx"]
+[ext_resource type="Script" path="res://bullet.gd" id="1_kfmoy"]
+[ext_resource type="Texture2D" uid="uid://c6tpsveu8kh5j" path="res://arts/ships/jet.png" id="3_bvyp6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qg4u3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7t6jx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lqkec"]
+radius = 4.0
+
+[node name="Bullet" type="RigidBody2D"]
+mass = 200.0
+gravity_scale = 0.0
+script = ExtResource("1_kfmoy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_qg4u3")
+
+[node name="BurstTimer" type="Timer" parent="."]
+wait_time = 0.001
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_lqkec")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -21)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bvyp6")
+
+[connection signal="timeout" from="BurstTimer" to="." method="_on_burst_timer_timeout"]

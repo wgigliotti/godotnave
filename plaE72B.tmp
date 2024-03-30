@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://dodelwthvhjyd"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_vh8eq"]
+[ext_resource type="Texture2D" uid="uid://brn3ktrf305oy" path="res://arts/ships/ship2.png" id="2_jbs1b"]
+[ext_resource type="Texture2D" uid="uid://c6tpsveu8kh5j" path="res://arts/ships/jet.png" id="3_rtgis"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o200v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jbs1b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l61ej"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_psj5x"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 33.71
+linear_accel_max = 33.71
+
+[node name="Player" type="RigidBody2D"]
+mass = 2000.0
+gravity_scale = 0.0
+script = ExtResource("1_vh8eq")
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o200v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 1)
+polygon = PackedVector2Array(-55, -30, 55, -31, 65, 19, 42, 54, -41, 54, -65, 19)
+
+[node name="RightProp" type="Node2D" parent="."]
+position = Vector2(-37, -46)
+
+[node name="Jet" type="GPUParticles2D" parent="RightProp"]
+rotation = 3.14159
+amount = 13
+process_material = SubResource("ParticleProcessMaterial_l61ej")
+
+[node name="LeftProp" type="Node2D" parent="."]
+position = Vector2(37, -46)
+
+[node name="Jet" type="GPUParticles2D" parent="LeftProp"]
+rotation = 3.14159
+amount = 13
+process_material = SubResource("ParticleProcessMaterial_psj5x")
+
+[node name="RightJet" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-37, -60)
+texture = ExtResource("3_rtgis")
+
+[node name="LeftJet" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(37, -59)
+texture = ExtResource("3_rtgis")
+
+[node name="CannonLeft" type="Node2D" parent="."]
+position = Vector2(28, 80)
+
+[node name="CannonRight" type="Node2D" parent="."]
+position = Vector2(-28, 80)
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]

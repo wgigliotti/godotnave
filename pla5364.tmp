@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dodelwthvhjyd"]
+
+[ext_resource type="Texture2D" uid="uid://dfm7g7tmtptnf" path="res://arts/ships/player_ship.png" id="1_mo55y"]
+[ext_resource type="Script" path="res://player.gd" id="1_vh8eq"]
+[ext_resource type="Script" path="res://PlayerShip.gd" id="2_pi4cu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o200v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mo55y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_vh8eq")
+
+[node name="PlayerUI" type="Node2D" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerUI"]
+offset_left = -70.0
+offset_top = -57.0
+offset_right = 70.0
+offset_bottom = -53.0
+value = 90.0
+show_percentage = false
+
+[node name="PlayerShip" type="Node2D" parent="."]
+script = ExtResource("2_pi4cu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerShip"]
+sprite_frames = SubResource("SpriteFrames_o200v")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="PlayerShip"]
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]

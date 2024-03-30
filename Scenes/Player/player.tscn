@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dodelwthvhjyd"]
+[gd_scene load_steps=8 format=3 uid="uid://dodelwthvhjyd"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_avrvs"]
+[ext_resource type="PackedScene" uid="uid://csra51xarmw1o" path="res://Scenes/Bullet/shoot.tscn" id="2_1x7kh"]
 [ext_resource type="Texture2D" uid="uid://brn3ktrf305oy" path="res://Art/ships/ship2.png" id="2_ad1ml"]
 [ext_resource type="Texture2D" uid="uid://c6tpsveu8kh5j" path="res://Art/ships/jet.png" id="3_b007w"]
 
@@ -27,9 +28,10 @@ gravity = Vector3(0, 0, 0)
 mass = 2000.0
 gravity_scale = 0.0
 script = ExtResource("1_avrvs")
+bullet_scene = ExtResource("2_1x7kh")
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o200v")

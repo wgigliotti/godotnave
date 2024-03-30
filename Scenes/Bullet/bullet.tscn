@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2uvxqjtah37q"]
 
-[ext_resource type="Texture2D" uid="uid://nb7ycw6bjt44" path="res://arts/missil.png" id="1_7t6jx"]
-[ext_resource type="Script" path="res://bullet.gd" id="1_kfmoy"]
-[ext_resource type="Texture2D" uid="uid://c6tpsveu8kh5j" path="res://arts/ships/jet.png" id="3_bvyp6"]
+[ext_resource type="Texture2D" uid="uid://nb7ycw6bjt44" path="res://Art/missil.png" id="1_7t6jx"]
+[ext_resource type="Script" path="res://Scenes/Bullet/bullet.gd" id="1_kfmoy"]
+[ext_resource type="Texture2D" uid="uid://c6tpsveu8kh5j" path="res://Art/ships/jet.png" id="3_bvyp6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qg4u3"]
 animations = [{

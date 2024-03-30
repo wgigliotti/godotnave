@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ct7o81rfdnr5q"
-path="res://.godot/imported/inimigo.png-9d47dd28220a03642646cad21c6d5f0c.ctex"
+path="res://.godot/imported/inimigo.png-8536500ecd88150397cd88aa84f782c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/ships/inimigo.png"
-dest_files=["res://.godot/imported/inimigo.png-9d47dd28220a03642646cad21c6d5f0c.ctex"]
+source_file="res://Art/ships/inimigo.png"
+dest_files=["res://.godot/imported/inimigo.png-8536500ecd88150397cd88aa84f782c5.ctex"]
 
 [params]
 

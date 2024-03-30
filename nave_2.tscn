@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwghivgirvhhp"]
 
-[ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://player.tscn" id="1_fkx52"]
-[ext_resource type="PackedScene" uid="uid://d2uvxqjtah37q" path="res://bullet.tscn" id="2_rt75s"]
+[ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://Scenes/Player/player.tscn" id="1_fkx52"]
+[ext_resource type="PackedScene" uid="uid://d2uvxqjtah37q" path="res://Scenes/Bullet/bullet.tscn" id="2_rt75s"]
 
 [node name="Inimigo" type="Node2D"]
 

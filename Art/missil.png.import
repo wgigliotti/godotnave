@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfm7g7tmtptnf"
-path="res://.godot/imported/player_ship.png-9bfc4599c83b01d7d2591063238f8a3b.ctex"
+uid="uid://nb7ycw6bjt44"
+path="res://.godot/imported/missil.png-0cb27d927af1cc17539537ca632b398f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/ships/player_ship.png"
-dest_files=["res://.godot/imported/player_ship.png-9bfc4599c83b01d7d2591063238f8a3b.ctex"]
+source_file="res://Art/missil.png"
+dest_files=["res://.godot/imported/missil.png-0cb27d927af1cc17539537ca632b398f.ctex"]
 
 [params]
 

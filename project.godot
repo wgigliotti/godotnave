@@ -28,7 +28,8 @@ project/assembly_name="WIll Space"
 folder_colors={
 "res://Art/": "yellow",
 "res://Scenes/": "red",
-"res://Scripts/": "green"
+"res://Scripts/": "green",
+"res://Sounds/": "blue"
 }
 
 [input]

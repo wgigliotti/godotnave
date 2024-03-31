@@ -2,6 +2,8 @@ extends RigidBody2D
 
 @export var bullet_scene: PackedScene
 
+@onready var cannon_shoot = $CannonShoot
+
 @export var left: String
 @export var right: String
 @export var up: String
@@ -49,6 +51,7 @@ func _process(delta):
 	
 	if Input.is_action_pressed(shoot_key):
 		if can_shoot == true:
+			cannon_shoot.play()
 			can_shoot = false
 			$ShootTimer.start()
 			shoot()

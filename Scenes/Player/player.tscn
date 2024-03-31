@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dodelwthvhjyd"]
+[gd_scene load_steps=9 format=3 uid="uid://dodelwthvhjyd"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_avrvs"]
 [ext_resource type="PackedScene" uid="uid://csra51xarmw1o" path="res://Scenes/Bullet/shoot.tscn" id="2_1x7kh"]
 [ext_resource type="Texture2D" uid="uid://brn3ktrf305oy" path="res://Art/ships/ship2.png" id="2_ad1ml"]
 [ext_resource type="Texture2D" uid="uid://c6tpsveu8kh5j" path="res://Art/ships/jet.png" id="3_b007w"]
+[ext_resource type="AudioStream" uid="uid://dd53io4htu1s6" path="res://Sounds/Shoot.ogg" id="5_rnvyt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o200v"]
 animations = [{
@@ -72,5 +73,10 @@ position = Vector2(28, 80)
 position = Vector2(-28, 80)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CannonShoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_rnvyt")
+volume_db = -4.621
+pitch_scale = 1.69
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]

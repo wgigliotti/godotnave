@@ -1,7 +1,8 @@
 extends Control
 
-@export var address = "127.0.0.1"
 @export var port = 8910
+
+@export var SceneMap: PackedScene
 
 var peer
 # Called when the node enters the scene tree for the first time.
@@ -19,6 +20,7 @@ func _process(delta):
 
 func connected_to_server():
 	print("Connected")
+	send_player_information.rpc_id(1, $nameLine.text, multiplayer.get_unique_id())
 	
 func connection_failed():
 	print("Connection Failed")
@@ -42,11 +44,11 @@ func _on_host_button_down():
 	multiplayer.set_multiplayer_peer(peer)
 	print("Waiting for players")
 	
-	
+	send_player_information($nameLine.text, multiplayer.get_unique_id())
 
 func _on_join_button_down():
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(address, port)
+	peer.create_client($hostLine.text, port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 	
@@ -54,11 +56,11 @@ func _on_join_button_down():
 
 @rpc("any_peer", "call_local")
 func start_game():
-		var scene = load("res://main.tscn").instantiate()
+		var scene = SceneMap.instantiate()
 		get_tree().root.add_child(scene)
 		self.hide()
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer")
 func send_player_information(name, id):
 	if !GameManager.players.has(id):
 		GameManager.players[id] = {
@@ -68,8 +70,8 @@ func send_player_information(name, id):
 		}
 		
 	if multiplayer.is_server():
-		for i in GamaManager.players:
-			send_player_information.rpc(GamaManager.players[id], id)
+		for i in GameManager.players:
+			send_player_information.rpc(GameManager.players[i], i)
 
 
 func _on_start_game_button_down():

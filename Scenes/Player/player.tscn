@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dodelwthvhjyd"]
+[gd_scene load_steps=10 format=3 uid="uid://dodelwthvhjyd"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_avrvs"]
-[ext_resource type="PackedScene" uid="uid://csra51xarmw1o" path="res://Scenes/Bullet/shoot.tscn" id="2_1x7kh"]
 [ext_resource type="Texture2D" uid="uid://brn3ktrf305oy" path="res://Art/ships/ship2.png" id="2_ad1ml"]
+[ext_resource type="PackedScene" uid="uid://d2uvxqjtah37q" path="res://Scenes/Bullet/bullet.tscn" id="2_lcs3t"]
 [ext_resource type="Script" path="res://Scenes/Player/Controls.gd" id="4_nwvq1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o200v"]
@@ -24,11 +24,30 @@ gravity = Vector3(0, 0, 0)
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_50e5m"]
+properties/0/path = NodePath(".:left")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:right")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:shoot")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7dw5v"]
+properties/0/path = NodePath(".:syncPosition")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:syncRotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Player" type="RigidBody2D"]
 mass = 2000.0
 gravity_scale = 0.0
 script = ExtResource("1_avrvs")
-bullet_scene = ExtResource("2_1x7kh")
+bullet_scene = ExtResource("2_lcs3t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o200v")
@@ -72,5 +91,11 @@ script = ExtResource("4_nwvq1")
 LeftKey = "p1_left"
 RightKey = "p1_right"
 ShootKey = "p1_shoot"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Controls"]
+replication_config = SubResource("SceneReplicationConfig_50e5m")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7dw5v")
 
 [connection signal="timeout" from="Cannons/ShootTimer" to="." method="_on_timer_timeout"]

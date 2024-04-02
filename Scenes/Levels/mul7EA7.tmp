@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlstynjwd686u"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/multiplayer_map.gd" id="1_37nnk"]
+[ext_resource type="PackedScene" uid="uid://dpqrj4pj7e4k6" path="res://Scenes/HUD/HUD.tscn" id="2_2lx4d"]
+
+[node name="MultiplayerMap" type="Node"]
+script = ExtResource("1_37nnk")
+
+[node name="Spawns" type="Node" parent="."]
+
+[node name="0" type="Node2D" parent="Spawns"]
+position = Vector2(115, 62)
+
+[node name="1" type="Node2D" parent="Spawns"]
+position = Vector2(960, 272)
+
+[node name="2" type="Node2D" parent="Spawns"]
+position = Vector2(310, 466)
+
+[node name="Hud" parent="." instance=ExtResource("2_2lx4d")]
+script = null

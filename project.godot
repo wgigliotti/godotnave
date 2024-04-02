@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="WIll Space"
-run/main_scene="res://Scenes/Levels/main.tscn"
+run/main_scene="res://Scenes/Multiplayer/MultiplayerScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameManager="*res://Scripts/GameManager.gd"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/stretch/mode="viewport"
 
 [dotnet]
 

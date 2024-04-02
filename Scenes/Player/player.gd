@@ -2,16 +2,25 @@ extends RigidBody2D
 
 @export var bullet_scene: PackedScene
 
-var acceleration = 200
+var acceleration = 8000
 var velocity = Vector2.DOWN 
 var rotation_speed = 3.5
 
 var can_shoot = true
 var cannon_left = true
 
+var syncPosition = Vector2(0,0)
+var syncRotation = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$Camera2D.enabled = true if str(name).to_int() == multiplayer.get_unique_id() else false
+	
+	if str(name).to_int() != multiplayer.get_unique_id():
+		$Controls.LeftKey = ""
+		$Controls.RightKey = ""
+		$Controls.ShootKey = ""
+	$Controls/MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
 func shoot():
 	print("shooting")
@@ -19,9 +28,7 @@ func shoot():
 	
 	var cannon = $Cannons/CannonLeft.position.rotated(rotation) if cannon_left else $Cannons/CannonRight.position.rotated(rotation)
 	cannon_left = !cannon_left
-	
-	print(cannon_left)
-	
+
 	bullet.position = position + cannon
 	bullet.rotation = rotation
 	bullet.velocity = velocity
@@ -47,6 +54,13 @@ func _process(delta):
 			can_shoot = false
 			$Cannons/ShootTimer.start()
 			shoot()
+
+	if multiplayer.get_unique_id() == 1:
+		syncPosition = global_position
+		syncRotation = rotation_degrees
+	else:
+		global_position = global_position.lerp(syncPosition, 0.5)
+		rotation_degrees = syncRotation
 
 
 func _on_timer_timeout():

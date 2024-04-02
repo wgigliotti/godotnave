@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_avrvs"]
 [ext_resource type="PackedScene" uid="uid://csra51xarmw1o" path="res://Scenes/Bullet/shoot.tscn" id="2_1x7kh"]
 [ext_resource type="Texture2D" uid="uid://brn3ktrf305oy" path="res://Art/ships/ship2.png" id="2_ad1ml"]
-[ext_resource type="Texture2D" uid="uid://c6tpsveu8kh5j" path="res://Art/ships/jet.png" id="3_b007w"]
+[ext_resource type="Script" path="res://Scenes/Player/Controls.gd" id="4_nwvq1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o200v"]
 animations = [{
@@ -16,11 +16,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l61ej"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_psj5x"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_psj5x"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l61ej"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 
@@ -30,9 +30,6 @@ gravity_scale = 0.0
 script = ExtResource("1_avrvs")
 bullet_scene = ExtResource("2_1x7kh")
 
-[node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.2
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o200v")
 
@@ -40,37 +37,40 @@ sprite_frames = SubResource("SpriteFrames_o200v")
 position = Vector2(0, 1)
 polygon = PackedVector2Array(-55, -30, 55, -31, 65, 19, 42, 54, -41, 54, -65, 19)
 
-[node name="RightProp" type="Node2D" parent="."]
-position = Vector2(-37, -46)
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Jet" type="GPUParticles2D" parent="RightProp"]
-amount = 13
-process_material = SubResource("ParticleProcessMaterial_l61ej")
+[node name="Cannons" type="Node2D" parent="."]
 
-[node name="LeftProp" type="Node2D" parent="."]
+[node name="CannonRight" type="Node2D" parent="Cannons"]
+position = Vector2(-28, 80)
+
+[node name="CannonLeft" type="Node2D" parent="Cannons"]
+position = Vector2(28, 80)
+
+[node name="ShootTimer" type="Timer" parent="Cannons"]
+wait_time = 0.2
+
+[node name="Jets" type="Node2D" parent="."]
+
+[node name="LeftProp" type="Node2D" parent="Jets"]
 position = Vector2(37, -46)
 
-[node name="Jet" type="GPUParticles2D" parent="LeftProp"]
+[node name="Jet" type="GPUParticles2D" parent="Jets/LeftProp"]
 rotation = 3.14159
 amount = 13
 process_material = SubResource("ParticleProcessMaterial_psj5x")
 
-[node name="RightJet" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-37, -60)
-texture = ExtResource("3_b007w")
+[node name="RightProp" type="Node2D" parent="Jets"]
+position = Vector2(-37, -46)
 
-[node name="LeftJet" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(37, -59)
-texture = ExtResource("3_b007w")
+[node name="Jet" type="GPUParticles2D" parent="Jets/RightProp"]
+amount = 13
+process_material = SubResource("ParticleProcessMaterial_l61ej")
 
-[node name="CannonLeft" type="Node2D" parent="."]
-position = Vector2(28, 80)
+[node name="Controls" type="Node" parent="."]
+script = ExtResource("4_nwvq1")
+LeftKey = "p1_left"
+RightKey = "p1_right"
+ShootKey = "p1_shoot"
 
-[node name="CannonRight" type="Node2D" parent="."]
-position = Vector2(-28, 80)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Cannons/ShootTimer" to="." method="_on_timer_timeout"]

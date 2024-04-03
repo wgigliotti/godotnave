@@ -2,7 +2,11 @@ extends RigidBody2D
 
 @export var bullet_scene: PackedScene
 
+
+@onready var cannon_shoot = $CannonShoot
+
 var acceleration = 8000
+
 var velocity = Vector2.DOWN 
 var rotation_speed = 3.5
 var shoot_freq = 1
@@ -57,6 +61,7 @@ func _process(delta):
 	
 	if $Controls.shoot:
 		if can_shoot == true:
+			cannon_shoot.play()
 			can_shoot = false
 			$Cannons/ShootTimer.wait_time = 1.0/shoot_freq			
 			$Cannons/ShootTimer.start()

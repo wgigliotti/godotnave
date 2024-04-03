@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_avrvs"]
 [ext_resource type="Texture2D" uid="uid://brn3ktrf305oy" path="res://Art/ships/ship2.png" id="2_ad1ml"]
+[ext_resource type="AudioStream" uid="uid://dd53io4htu1s6" path="res://Sounds/Shoot.ogg" id="5_rnvyt"]
 [ext_resource type="PackedScene" uid="uid://d2uvxqjtah37q" path="res://Scenes/Bullet/bullet.tscn" id="2_lcs3t"]
 [ext_resource type="Script" path="res://Scenes/Player/Controls.gd" id="4_nwvq1"]
 
@@ -98,4 +99,11 @@ replication_config = SubResource("SceneReplicationConfig_50e5m")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7dw5v")
 
+
+[node name="CannonShoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_rnvyt")
+volume_db = -4.621
+pitch_scale = 1.69
+
 [connection signal="timeout" from="Cannons/ShootTimer" to="." method="_on_timer_timeout"]
+

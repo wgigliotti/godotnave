@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpqrj4pj7e4k6"]
+
+[ext_resource type="Script" path="res://Scenes/HUD/HUD.gd" id="1_ojrqq"]
+[ext_resource type="Texture2D" uid="uid://nb7ycw6bjt44" path="res://Art/missil.png" id="2_dm02c"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_ojrqq")
+
+[node name="position" type="Label" parent="."]
+offset_left = 74.0
+offset_top = 20.0
+offset_right = 186.0
+offset_bottom = 54.0
+text = "aaaa"
+
+[node name="acceleration" type="Label" parent="."]
+offset_left = 75.0
+offset_top = 69.0
+offset_right = 115.0
+offset_bottom = 92.0
+text = "0"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.945098, 0.615686, 0.466667)
+position = Vector2(60, 80)
+scale = Vector2(0.7, 0.438)
+texture = ExtResource("2_dm02c")

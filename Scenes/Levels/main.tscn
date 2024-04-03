@@ -1,15 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cddetetpqv8kb"]
+[gd_scene load_steps=2 format=3 uid="uid://cddetetpqv8kb"]
 
 [ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://Scenes/Player/player.tscn" id="1_fqwam"]
-[ext_resource type="PackedScene" uid="uid://cwghivgirvhhp" path="res://nave_2.tscn" id="3_3n8e1"]
 
 [node name="Main" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_fqwam")]
 position = Vector2(297, 238)
-left = "p2_left"
-right = "p2_right"
-shoot_key = "p2_shoot"
-
-[node name="Nave2" parent="." instance=ExtResource("3_3n8e1")]
-position = Vector2(978, 237)

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlstynjwd686u"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/multiplayer_map.gd" id="1_37nnk"]
+[ext_resource type="PackedScene" uid="uid://dpqrj4pj7e4k6" path="res://Scenes/HUD/HUD.tscn" id="2_2lx4d"]
+[ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://Scenes/Player/player.tscn" id="2_5ua4h"]
+[ext_resource type="PackedScene" uid="uid://b0u046j1i4kon" path="res://Scenes/PowerUPs/pu_bullet.tscn" id="4_oqmxt"]
+
+[node name="MultiplayerMap" type="Node"]
+script = ExtResource("1_37nnk")
+PlayerScene = ExtResource("2_5ua4h")
+
+[node name="Spawns" type="Node" parent="."]
+
+[node name="0" type="Node2D" parent="Spawns" groups=["spawns_points"]]
+position = Vector2(115, 62)
+
+[node name="1" type="Node2D" parent="Spawns" groups=["spawns_points"]]
+position = Vector2(960, 272)
+
+[node name="2" type="Node2D" parent="Spawns" groups=["spawns_points"]]
+position = Vector2(310, 466)
+
+[node name="Hud" parent="." instance=ExtResource("2_2lx4d")]
+script = null
+
+[node name="pu_bullet" parent="." instance=ExtResource("4_oqmxt")]
+position = Vector2(131, 234)
+
+[node name="pu_bullet2" parent="." instance=ExtResource("4_oqmxt")]
+position = Vector2(416, 239)
+
+[node name="pu_bullet3" parent="." instance=ExtResource("4_oqmxt")]
+position = Vector2(709, 230)

@@ -89,9 +89,11 @@ process_material = SubResource("ParticleProcessMaterial_l61ej")
 
 [node name="Controls" type="Node" parent="."]
 script = ExtResource("4_nwvq1")
-LeftKey = "p1_left"
-RightKey = "p1_right"
-ShootKey = "p1_shoot"
+LeftKey = "left_jet"
+RightKey = "right_jet"
+ShootKey = "shoot"
+LeftReverseKey = "left_jet_r"
+RightReverseKey = "right_jet_r"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Controls"]
 replication_config = SubResource("SceneReplicationConfig_50e5m")

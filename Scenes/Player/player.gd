@@ -47,11 +47,11 @@ func shoot():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-func jet(particle, pressed, propNode):
+func jet(particle, force, propNode):
 	particle.emitting = false	
-	if pressed:		
+	if force != 0:		
 		particle.emitting = true		
-		apply_force(Vector2.DOWN.rotated(rotation)*80000, propNode.get_position().rotated(rotation))
+		apply_force(Vector2.DOWN.rotated(rotation)*80000*force, propNode.get_position().rotated(rotation))
 	
 	
 func _process(delta):	

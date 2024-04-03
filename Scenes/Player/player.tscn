@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dodelwthvhjyd"]
+[gd_scene load_steps=11 format=3 uid="uid://dodelwthvhjyd"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_avrvs"]
 [ext_resource type="Texture2D" uid="uid://brn3ktrf305oy" path="res://Art/ships/ship2.png" id="2_ad1ml"]
-[ext_resource type="AudioStream" uid="uid://dd53io4htu1s6" path="res://Sounds/Shoot.ogg" id="5_rnvyt"]
-[ext_resource type="PackedScene" uid="uid://d2uvxqjtah37q" path="res://Scenes/Bullet/bullet.tscn" id="2_lcs3t"]
+[ext_resource type="PackedScene" uid="uid://csra51xarmw1o" path="res://Scenes/Bullet/shoot.tscn" id="2_txh4a"]
 [ext_resource type="Script" path="res://Scenes/Player/Controls.gd" id="4_nwvq1"]
+[ext_resource type="AudioStream" uid="uid://dd53io4htu1s6" path="res://Sounds/Shoot.ogg" id="5_rnvyt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o200v"]
 animations = [{
@@ -48,7 +48,7 @@ properties/1/replication_mode = 1
 mass = 2000.0
 gravity_scale = 0.0
 script = ExtResource("1_avrvs")
-bullet_scene = ExtResource("2_lcs3t")
+bullet_scene = ExtResource("2_txh4a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o200v")
@@ -73,7 +73,7 @@ one_shot = true
 [node name="Jets" type="Node2D" parent="."]
 
 [node name="LeftProp" type="Node2D" parent="Jets"]
-position = Vector2(37, -46)
+position = Vector2(36, -44)
 
 [node name="Jet" type="GPUParticles2D" parent="Jets/LeftProp"]
 rotation = 3.14159
@@ -81,7 +81,7 @@ amount = 13
 process_material = SubResource("ParticleProcessMaterial_psj5x")
 
 [node name="RightProp" type="Node2D" parent="Jets"]
-position = Vector2(-37, -46)
+position = Vector2(-36, -44)
 
 [node name="Jet" type="GPUParticles2D" parent="Jets/RightProp"]
 amount = 13
@@ -99,11 +99,9 @@ replication_config = SubResource("SceneReplicationConfig_50e5m")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7dw5v")
 
-
 [node name="CannonShoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_rnvyt")
 volume_db = -4.621
 pitch_scale = 1.69
 
 [connection signal="timeout" from="Cannons/ShootTimer" to="." method="_on_timer_timeout"]
-

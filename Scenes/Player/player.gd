@@ -9,7 +9,7 @@ var acceleration = 8000
 
 var velocity = Vector2.DOWN 
 var rotation_speed = 3.5
-var shoot_freq = 1
+var shoot_freq = 2
 
 var can_shoot = true
 var cannon_left = true

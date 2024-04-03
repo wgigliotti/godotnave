@@ -13,6 +13,6 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
-		body.getPW(2)
+		body.getPW(1.1)
 		queue_free()
 	

@@ -11,3 +11,10 @@ offset_top = 16.0
 offset_right = 157.0
 offset_bottom = 50.0
 text = "aaaa"
+
+[node name="acceleration" type="Label" parent="."]
+offset_left = 47.0
+offset_top = 47.0
+offset_right = 87.0
+offset_bottom = 70.0
+text = "0"

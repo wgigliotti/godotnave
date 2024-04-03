@@ -43,7 +43,7 @@ properties/1/path = NodePath(".:syncRotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" groups=["player"]]
 mass = 2000.0
 gravity_scale = 0.0
 script = ExtResource("1_avrvs")
@@ -67,7 +67,7 @@ position = Vector2(-28, 80)
 position = Vector2(28, 80)
 
 [node name="ShootTimer" type="Timer" parent="Cannons"]
-wait_time = 0.2
+one_shot = true
 
 [node name="Jets" type="Node2D" parent="."]
 

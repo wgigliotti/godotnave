@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0u046j1i4kon"]
+
+[ext_resource type="Texture2D" uid="uid://c040hjsfcu1r0" path="res://Art/powerup/pu_bullet.png" id="1_d0yea"]
+[ext_resource type="Script" path="res://Scenes/PowerUPs/pu_bullet.gd" id="1_xjrcs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u40n2"]
+radius = 33.0
+
+[node name="pu_bullet" type="Area2D"]
+script = ExtResource("1_xjrcs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d0yea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u40n2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

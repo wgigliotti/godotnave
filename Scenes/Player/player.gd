@@ -5,6 +5,7 @@ extends RigidBody2D
 var acceleration = 8000
 var velocity = Vector2.DOWN 
 var rotation_speed = 3.5
+var shoot_freq = 1
 
 var can_shoot = true
 var cannon_left = true
@@ -15,6 +16,11 @@ var syncRotation = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Camera2D.enabled = true if str(name).to_int() == multiplayer.get_unique_id() else false
+	
+	$Cannons/ShootTimer.wait_time = 1.0/shoot_freq
+	
+	print($Cannons/ShootTimer.wait_time)
+	
 	
 	if str(name).to_int() != multiplayer.get_unique_id():
 		$Controls.LeftKey = ""
@@ -52,6 +58,7 @@ func _process(delta):
 	if $Controls.shoot:
 		if can_shoot == true:
 			can_shoot = false
+			$Cannons/ShootTimer.wait_time = 1.0/shoot_freq			
 			$Cannons/ShootTimer.start()
 			shoot()
 
@@ -65,3 +72,6 @@ func _process(delta):
 
 func _on_timer_timeout():
 	can_shoot = true
+	
+func getPW(power):
+	shoot_freq *= power

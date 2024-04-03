@@ -34,3 +34,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$Hud/position.text = str(player.global_position)
+	$Hud/acceleration.text = str(player.shoot_freq)
+	#print(player)
+	

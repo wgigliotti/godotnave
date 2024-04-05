@@ -47,6 +47,7 @@ properties/1/replication_mode = 1
 [node name="Player" type="RigidBody2D" groups=["player"]]
 mass = 2000.0
 gravity_scale = 0.0
+center_of_mass_mode = 1
 script = ExtResource("1_avrvs")
 bullet_scene = ExtResource("2_txh4a")
 

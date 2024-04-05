@@ -9,7 +9,7 @@ var acceleration = 8000
 
 var velocity = Vector2.DOWN 
 var rotation_speed = 3.5
-var shoot_freq = 2
+var shoot_freq = 1
 
 var can_shoot = true
 var cannon_left = true
@@ -33,7 +33,6 @@ func _ready():
 	$Controls/MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
 func shoot():
-	print("shooting")
 	var bullet = bullet_scene.instantiate()
 	
 	var cannon = $Cannons/CannonLeft.position.rotated(rotation) if cannon_left else $Cannons/CannonRight.position.rotated(rotation)

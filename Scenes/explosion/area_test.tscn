@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://e122pjl84qx2"]
+
+[ext_resource type="Texture2D" uid="uid://c171rexwuv7pw" path="res://Art/meteour.png" id="1_1gw41"]
+[ext_resource type="Script" path="res://Scenes/explosion/area_test.gd" id="1_xyxca"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_anvdl"]
+radius = 108.005
+
+[sub_resource type="Gradient" id="Gradient_gqeqy"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_20oe0"]
+gradient = SubResource("Gradient_gqeqy")
+
+[sub_resource type="Curve" id="Curve_fbwfx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.043956), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_o0wcn"]
+curve = SubResource("Curve_fbwfx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mvir8"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 224.72
+initial_velocity_max = 224.72
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_o0wcn")
+color_ramp = SubResource("GradientTexture1D_20oe0")
+
+[node name="AreaTest" type="Area2D"]
+script = ExtResource("1_xyxca")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_anvdl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_1gw41")
+
+[node name="ExplosionTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(1.75, 0, 0, 1)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_mvir8")
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="timeout" from="ExplosionTimer" to="." method="_on_explosion_timer_timeout"]
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://bepavqgt37mix"]
+
+[ext_resource type="Texture2D" uid="uid://corx40rqpx36p" path="res://Art/bg/space.webp" id="1_swx1y"]
+
+[node name="StarBackground" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Estrelas" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(100, 100)
+motion_mirroring = Vector2(2400, 1350)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Estrelas"]
+texture = ExtResource("1_swx1y")
+centered = false
+
+[node name="Estrelas2" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+position = Vector2(1200, 675)
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(100, 100)
+motion_mirroring = Vector2(2400, 1350)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Estrelas2"]
+texture = ExtResource("1_swx1y")
+centered = false
+
+[node name="Estrelas3" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+position = Vector2(1200, 0)
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(100, 100)
+motion_mirroring = Vector2(2400, 1350)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Estrelas3"]
+texture = ExtResource("1_swx1y")
+centered = false
+
+[node name="Estrelas4" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+position = Vector2(0, 675)
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(100, 100)
+motion_mirroring = Vector2(2400, 1350)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Estrelas4"]
+texture = ExtResource("1_swx1y")
+centered = false

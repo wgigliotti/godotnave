@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bepavqgt37mix"]
+[gd_scene load_steps=3 format=3 uid="uid://bepavqgt37mix"]
 
 [ext_resource type="Texture2D" uid="uid://corx40rqpx36p" path="res://Art/bg/space.webp" id="1_swx1y"]
 [ext_resource type="PackedScene" uid="uid://dnjhuxwog1e3b" path="res://Scenes/Levels/BGs/ShipBackground.tscn" id="2_jtsd6"]
-[ext_resource type="Script" path="res://Scenes/Levels/BGs/ShipLayer.gd" id="2_yb80x"]
 
 [node name="StarBackground" type="Node2D"]
 
@@ -51,11 +50,8 @@ motion_mirroring = Vector2(2400, 1350)
 texture = ExtResource("1_swx1y")
 centered = false
 
-[node name="ShipLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-script = ExtResource("2_yb80x")
-shipScene = ExtResource("2_jtsd6")
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
-[node name="NewShipTimer" type="Timer" parent="ParallaxBackground/ShipLayer"]
-one_shot = true
-
-[connection signal="timeout" from="ParallaxBackground/ShipLayer/NewShipTimer" to="ParallaxBackground/ShipLayer" method="_on_new_ship_timer_timeout"]
+[node name="ShipBackground" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource("2_jtsd6")]
+position = Vector2(730, 236)
+scale = Vector2(0.2, 0.2)

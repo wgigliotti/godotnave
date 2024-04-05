@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnjhuxwog1e3b"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/BGs/ShipBackground.gd" id="1_h7het"]
+[ext_resource type="Texture2D" uid="uid://ckof7wjoeyviw" path="res://Art/ships/SmallShip.png" id="2_5ogdy"]
+
+[node name="ShipBackground" type="Node2D"]
+script = ExtResource("1_h7het")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.690196, 0.690196, 0.690196, 0.721569)
+texture = ExtResource("2_5ogdy")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="LifeTime" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]

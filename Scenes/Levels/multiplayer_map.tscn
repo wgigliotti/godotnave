@@ -1,15 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlstynjwd686u"]
+[gd_scene load_steps=8 format=3 uid="uid://dlstynjwd686u"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/multiplayer_map.gd" id="1_37nnk"]
 [ext_resource type="PackedScene" uid="uid://dpqrj4pj7e4k6" path="res://Scenes/HUD/HUD.tscn" id="2_2lx4d"]
-[ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://Scenes/Player/player.tscn" id="2_5ua4h"]
+[ext_resource type="PackedScene" uid="uid://d0m5vgs2sphwx" path="res://Scenes/Player/PlayerUI.tscn" id="2_ucnk3"]
+[ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://Scenes/Player/player.tscn" id="2_uw17n"]
 [ext_resource type="PackedScene" uid="uid://e122pjl84qx2" path="res://Scenes/explosion/area_test.tscn" id="3_00yd4"]
 [ext_resource type="PackedScene" uid="uid://b0u046j1i4kon" path="res://Scenes/PowerUPs/pu_bullet.tscn" id="4_oqmxt"]
 [ext_resource type="PackedScene" uid="uid://bepavqgt37mix" path="res://Scenes/Levels/BGs/StarBackground.tscn" id="6_6w4pm"]
 
 [node name="MultiplayerMap" type="Node2D"]
 script = ExtResource("1_37nnk")
-PlayerScene = ExtResource("2_5ua4h")
+PlayerScene = ExtResource("2_uw17n")
+UIScene = ExtResource("2_ucnk3")
 BombScene = ExtResource("3_00yd4")
 
 [node name="Spawns" type="Node" parent="."]
@@ -28,6 +30,7 @@ script = null
 
 [node name="pu_bullet" parent="." instance=ExtResource("4_oqmxt")]
 position = Vector2(131, 234)
+scale = Vector2(0.3, 0.3)
 
 [node name="pu_bullet2" parent="." instance=ExtResource("4_oqmxt")]
 position = Vector2(289, 235)

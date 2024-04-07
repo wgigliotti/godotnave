@@ -15,7 +15,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func connected_to_server():
@@ -61,17 +61,17 @@ func start_game():
 		self.hide()
 
 @rpc("any_peer")
-func send_player_information(name, id):
+func send_player_information(mname, id):
 	if !GameManager.players.has(id):
 		GameManager.players[id] = {
-			"name": name,
+			"name": mname,
 			"id": id,
 			"score": 0
 		}
 		
 	if multiplayer.is_server():
 		for i in GameManager.players:
-			send_player_information.rpc(GameManager.players[i], i)
+			send_player_information.rpc(GameManager.players[i].name, i)
 
 
 func _on_start_game_button_down():

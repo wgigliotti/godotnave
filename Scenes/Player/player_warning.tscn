@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxgsyaovpu2lg"]
+
+[ext_resource type="Script" path="res://Scenes/Player/player_warning.gd" id="1_pb2tn"]
+[ext_resource type="Texture2D" uid="uid://ct7o81rfdnr5q" path="res://Art/ships/inimigo.png" id="2_pfcbs"]
+
+[node name="PlayerWarning" type="Node2D"]
+script = ExtResource("1_pb2tn")
+
+[node name="Warning" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Warning"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_pfcbs")
+
+[node name="Label" type="Label" parent="Warning/Sprite2D"]
+modulate = Color(1, 0, 0, 1)
+offset_right = 40.0
+offset_bottom = 23.0
+text = "!"

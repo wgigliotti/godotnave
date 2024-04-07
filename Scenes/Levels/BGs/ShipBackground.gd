@@ -23,14 +23,14 @@ func die():
 		
 	$Sprite2D.scale.x = 1-delta
 	$Sprite2D.scale.y = 1-delta
-	
-	
+
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	retime()
 	start_time = Time.get_unix_time_from_system()
-	$LifeTime.wait_time = 2.5 + randf()*5
+	$LifeTime.wait_time = 2.5 + randf()*1
+	$LifeTime.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,8 +56,7 @@ func _on_timer_timeout():
 		rotation_dir = 0
 	retime()
 	
-	
-
 
 func _on_life_time_timeout():
+	start_time = Time.get_unix_time_from_system()
 	state = 1

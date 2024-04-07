@@ -5,7 +5,7 @@ var acceleration = 9000000
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	apply_force(Vector2.DOWN.rotated(rotation)*acceleration*0.1)
-	$AnimatedSprite2D
+	$BurstTimer.start()
 	#velocity += Vector2.DOWN.rotated(rotation)*acceleration*0.1
 	#$BurstTimer.start()
 

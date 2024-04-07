@@ -7,9 +7,8 @@ extends RigidBody2D
 
 var acceleration = 8000
 
-var velocity = Vector2.DOWN 
 var rotation_speed = 3.5
-var shoot_freq = 1
+var shoot_freq =5
 
 var can_shoot = true
 var cannon_left = true
@@ -17,9 +16,12 @@ var cannon_left = true
 var syncPosition = Vector2(0,0)
 var syncRotation = 0
 
+var id
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Camera2D.enabled = true if str(name).to_int() == multiplayer.get_unique_id() else false
+	id = str(name).to_int()
 	
 	$Cannons/ShootTimer.wait_time = 1.0/shoot_freq
 	
@@ -40,9 +42,11 @@ func shoot():
 
 	bullet.position = position + cannon
 	bullet.rotation = rotation
-	bullet.velocity = velocity
+	bullet.linear_velocity = Vector2.DOWN.rotated(rotation)*10 + linear_velocity
 	
 	get_parent().add_child(bullet)
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -57,6 +61,8 @@ func _process(delta):
 	jet($Jets/LeftProp/Jet, $Controls.left, $Jets/LeftProp)
 	jet($Jets/RightProp/Jet, $Controls.right, $Jets/RightProp)
 	
+	var zoom = 1/(pow(linear_velocity.length()/500, 0.5) + 1)
+	#$Camera2D.zoom = Vector2(zoom, zoom)
 	
 	if $Controls.shoot:
 		if can_shoot == true:

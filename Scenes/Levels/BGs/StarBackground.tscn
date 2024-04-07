@@ -7,11 +7,12 @@
 [node name="StarBackground" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2(1200, 0)
+scroll_ignore_camera_zoom = true
 
 [node name="Estrelas" type="ParallaxLayer" parent="ParallaxBackground"]
 texture_filter = 1
-motion_scale = Vector2(0.5, 0.5)
-motion_offset = Vector2(100, 100)
+motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(2400, 1350)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Estrelas"]
@@ -21,8 +22,7 @@ centered = false
 [node name="Estrelas2" type="ParallaxLayer" parent="ParallaxBackground"]
 texture_filter = 1
 position = Vector2(1200, 675)
-motion_scale = Vector2(0.5, 0.5)
-motion_offset = Vector2(100, 100)
+motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(2400, 1350)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Estrelas2"]
@@ -32,8 +32,7 @@ centered = false
 [node name="Estrelas3" type="ParallaxLayer" parent="ParallaxBackground"]
 texture_filter = 1
 position = Vector2(1200, 0)
-motion_scale = Vector2(0.5, 0.5)
-motion_offset = Vector2(100, 100)
+motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(2400, 1350)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Estrelas3"]
@@ -43,8 +42,7 @@ centered = false
 [node name="Estrelas4" type="ParallaxLayer" parent="ParallaxBackground"]
 texture_filter = 1
 position = Vector2(0, 675)
-motion_scale = Vector2(0.5, 0.5)
-motion_offset = Vector2(100, 100)
+motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(2400, 1350)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Estrelas4"]
@@ -52,6 +50,8 @@ texture = ExtResource("1_swx1y")
 centered = false
 
 [node name="ShipLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1200, 675)
 script = ExtResource("2_yb80x")
 shipScene = ExtResource("2_jtsd6")
 

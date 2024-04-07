@@ -8,19 +8,20 @@ func _ready():
 	$NewShipTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
 func _on_new_ship_timer_timeout():
 	var ship = shipScene.instantiate()
 	
-	ship.position = position + Vector2(randf_range(100,900), randf_range(100,600))
-	ship.rotation = rotation
-	ship.scale.x = 0.14
-	ship.scale.y = 0.14
+	ship.global_position = GameManager.player.global_position + Vector2(randf_range(-300,300), randf_range(-300,300))
+	ship.rotation = randf()*2*PI - PI
+	var shipScale = 0.05 + randf()*0.1
+	ship.scale.x = shipScale
+	ship.scale.y = shipScale
 	
 	
 	add_child(ship)
-	$NewShipTimer.wait_time = randf()*0.1
+	$NewShipTimer.wait_time = randf()*4
 	$NewShipTimer.start()

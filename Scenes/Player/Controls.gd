@@ -17,15 +17,16 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	
-	shoot = true if Input.is_action_pressed(ShootKey) else false
+	shoot = true if ShootKey != "" and Input.is_action_pressed(ShootKey) else false
 	
 	left = 0
-	if Input.is_action_pressed(LeftReverseKey):
+	
+	if LeftReverseKey != "" and Input.is_action_pressed(LeftReverseKey):
 		left = -1
 		
-	if Input.is_action_pressed(LeftKey):
+	if LeftKey != "" and Input.is_action_pressed(LeftKey):
 		left = 1
 		
 	#left = 1 if Input.is_action_pressed(LeftKey) else 0
@@ -33,9 +34,9 @@ func _process(delta):
 	
 	right = 0
 	
-	if Input.is_action_pressed(RightReverseKey):
+	if RightReverseKey != "" and Input.is_action_pressed(RightReverseKey):
 		right = -1
-	if Input.is_action_pressed(RightKey):
+	if RightKey != "" and Input.is_action_pressed(RightKey):
 		right = 1
 	
 	

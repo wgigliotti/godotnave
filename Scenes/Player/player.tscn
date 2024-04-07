@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dodelwthvhjyd"]
+[gd_scene load_steps=12 format=3 uid="uid://dodelwthvhjyd"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_avrvs"]
 [ext_resource type="Texture2D" uid="uid://brn3ktrf305oy" path="res://Art/ships/ship2.png" id="2_ad1ml"]
-[ext_resource type="PackedScene" uid="uid://csra51xarmw1o" path="res://Scenes/Bullet/shoot.tscn" id="2_txh4a"]
+[ext_resource type="PackedScene" uid="uid://d2uvxqjtah37q" path="res://Scenes/Bullet/bullet.tscn" id="2_ykk4x"]
 [ext_resource type="Script" path="res://Scenes/Player/Controls.gd" id="4_nwvq1"]
 [ext_resource type="AudioStream" uid="uid://dd53io4htu1s6" path="res://Sounds/Shoot.ogg" id="5_rnvyt"]
+[ext_resource type="PackedScene" uid="uid://cxgsyaovpu2lg" path="res://Scenes/Player/player_warning.tscn" id="6_6il0d"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o200v"]
 animations = [{
@@ -49,7 +50,7 @@ mass = 2000.0
 gravity_scale = 0.0
 center_of_mass_mode = 1
 script = ExtResource("1_avrvs")
-bullet_scene = ExtResource("2_txh4a")
+bullet_scene = ExtResource("2_ykk4x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o200v")
@@ -59,6 +60,7 @@ position = Vector2(0, 1)
 polygon = PackedVector2Array(-55, -30, 55, -31, 65, 19, 42, 54, -41, 54, -65, 19)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 
 [node name="Cannons" type="Node2D" parent="."]
 
@@ -106,5 +108,7 @@ replication_config = SubResource("SceneReplicationConfig_7dw5v")
 stream = ExtResource("5_rnvyt")
 volume_db = -4.621
 pitch_scale = 1.69
+
+[node name="PlayerWarning" parent="." instance=ExtResource("6_6il0d")]
 
 [connection signal="timeout" from="Cannons/ShootTimer" to="." method="_on_timer_timeout"]

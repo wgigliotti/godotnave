@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0m5vgs2sphwx"]
+
+[ext_resource type="Script" path="res://Scenes/Player/PlayerUI.gd" id="1_7t6x2"]
+[ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://Scenes/Player/player.tscn" id="1_yl5qm"]
+
+[node name="PlayerUi" type="Node2D"]
+script = ExtResource("1_7t6x2")
+PlayerScene = ExtResource("1_yl5qm")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -48.0
+offset_top = -91.0
+offset_right = 48.0
+offset_bottom = -68.0
+text = "Willian"
+horizontal_alignment = 1

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4bd2hq4ahvdl"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/objects/meteour_Score.gd" id="1_cp12p"]
+[ext_resource type="Texture2D" uid="uid://c171rexwuv7pw" path="res://Art/meteour.png" id="1_pyhrx"]
+[ext_resource type="Script" path="res://Scenes/Player/player_warning.gd" id="3_o7ea7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dpjck"]
+radius = 108.374
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qf38c"]
+radius = 1609.11
+
+[node name="Meteour" type="RigidBody2D"]
+mass = 30000.0
+gravity_scale = 0.0
+script = ExtResource("1_cp12p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dpjck")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pyhrx")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_qf38c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+modulate = Color(1, 0, 0, 0.207843)
+scale = Vector2(15, 15)
+texture = ExtResource("1_pyhrx")
+
+[node name="WarningMeteour" type="Node2D" parent="."]
+script = ExtResource("3_o7ea7")
+
+[node name="Warning" type="Sprite2D" parent="WarningMeteour"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_pyhrx")

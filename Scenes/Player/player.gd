@@ -5,10 +5,10 @@ extends RigidBody2D
 
 @onready var cannon_shoot = $CannonShoot
 
-var acceleration = 8000
+var acceleration = 80000
 
 var rotation_speed = 3.5
-var shoot_freq =5
+var shoot_freq = 3
 
 var can_shoot = true
 var cannon_left = true
@@ -25,8 +25,6 @@ func _ready():
 	
 	$Cannons/ShootTimer.wait_time = 1.0/shoot_freq
 	
-	print($Cannons/ShootTimer.wait_time)
-	
 	
 	if str(name).to_int() != multiplayer.get_unique_id():
 		$Controls.LeftKey = ""
@@ -34,6 +32,7 @@ func _ready():
 		$Controls.ShootKey = ""
 	$Controls/MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
+	
 func shoot():
 	var bullet = bullet_scene.instantiate()
 	
@@ -42,7 +41,7 @@ func shoot():
 
 	bullet.position = position + cannon
 	bullet.rotation = rotation
-	bullet.linear_velocity = Vector2.DOWN.rotated(rotation)*10 + linear_velocity
+	bullet.linear_velocity = Vector2.DOWN.rotated(rotation)*100 + linear_velocity
 	
 	get_parent().add_child(bullet)
 	
@@ -54,15 +53,17 @@ func jet(particle, force, propNode):
 	particle.emitting = false	
 	if force != 0:		
 		particle.emitting = true		
-		apply_force(Vector2.DOWN.rotated(rotation)*80000*force, propNode.get_position().rotated(rotation))
-	
+		apply_force(Vector2.DOWN.rotated(rotation)*acceleration*force, propNode.get_position().rotated(rotation))
+
+func getControls():
+	return $Controls
 	
 func _process(delta):	
 	jet($Jets/LeftProp/Jet, $Controls.left, $Jets/LeftProp)
 	jet($Jets/RightProp/Jet, $Controls.right, $Jets/RightProp)
 	
-	var zoom = 1/(pow(linear_velocity.length()/500, 0.5) + 1)
-	#$Camera2D.zoom = Vector2(zoom, zoom)
+	var zoom = 1/(linear_velocity.length()/2000 + 1)
+	$Camera2D.zoom = Vector2(zoom, zoom)
 	
 	if $Controls.shoot:
 		if can_shoot == true:

@@ -18,6 +18,5 @@ func _on_explosion_timer_timeout():
 	
 
 
-func _on_gpu_particles_2d_finished():
-	print("fim")
+func _on_gpu_particles_2d_finished():	
 	queue_free()

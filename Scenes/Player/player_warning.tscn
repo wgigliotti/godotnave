@@ -6,14 +6,8 @@
 [node name="PlayerWarning" type="Node2D"]
 script = ExtResource("1_pb2tn")
 
-[node name="Warning" type="Node2D" parent="."]
+[node name="Warning2" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Warning"]
+[node name="Warning" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_pfcbs")
-
-[node name="Label" type="Label" parent="Warning/Sprite2D"]
-modulate = Color(1, 0, 0, 1)
-offset_right = 40.0
-offset_bottom = 23.0
-text = "!"

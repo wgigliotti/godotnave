@@ -4,11 +4,16 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 
 @export var PlayerScene : PackedScene
+@export var BotScene : PackedScene
 @export var UIScene : PackedScene
 @export var BombScene: PackedScene
 
 var player
 
+func createBot(player):
+	var bot = BotScene.instantiate()
+	bot.setShip(player)
+	add_child(bot)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -17,12 +22,16 @@ func _ready():
 		
 		var currentPlayer = GameManager.create_player(PlayerScene, UIScene, self, i)
 		
+		if GameManager.players[i].name == "Bot":
+			createBot(currentPlayer)
+		
 		for spawn in get_tree().get_nodes_in_group("spawns_points"):
 			if spawn.name == str(index):				
 				currentPlayer.global_position = spawn.global_position
 				
-			index += 1
+		index += 1
 			
+	
 
 func _on_explode_bomb(area):
 	print("AREAS")
@@ -34,8 +43,8 @@ func _on_explode_bomb(area):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$Hud/position.text = str(GameManager.player.global_position)
-	$Hud/acceleration.text = str(GameManager.player.shoot_freq)
+	#$Hud/CanvasLayer/position.text = str(GameManager.player.global_position)
+	#$Hud/CanvasLayer/acceleration.text = str(GameManager.player.shoot_freq)
 	
 	if Input.is_action_just_pressed("mouse_click"):
 		var area = BombScene.instantiate()

@@ -39,7 +39,7 @@ gravity_scale = 0.0
 script = ExtResource("1_u2rcx")
 
 [node name="BurstTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 200.0
 one_shot = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

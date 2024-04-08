@@ -20,7 +20,7 @@ func _process(_delta):
 
 func connected_to_server():
 	print("Connected")
-	send_player_information.rpc_id(1, $nameLine.text, multiplayer.get_unique_id())
+	GameManager.send_player_information.rpc_id(1, GameManager.player_info($nameLine.text, multiplayer.get_unique_id()),  multiplayer.get_unique_id())
 	
 func connection_failed():
 	print("Connection Failed")
@@ -44,7 +44,7 @@ func _on_host_button_down():
 	multiplayer.set_multiplayer_peer(peer)
 	print("Waiting for players")
 	
-	send_player_information($nameLine.text, multiplayer.get_unique_id())
+	GameManager.send_player_information(GameManager.player_info($nameLine.text, multiplayer.get_unique_id()),  multiplayer.get_unique_id())	
 
 func _on_join_button_down():
 	peer = ENetMultiplayerPeer.new()
@@ -60,19 +60,8 @@ func start_game():
 		get_tree().root.add_child(scene)
 		self.hide()
 
-@rpc("any_peer")
-func send_player_information(mname, id):
-	if !GameManager.players.has(id):
-		GameManager.players[id] = {
-			"name": mname,
-			"id": id,
-			"score": 0
-		}
-		
-	if multiplayer.is_server():
-		for i in GameManager.players:
-			send_player_information.rpc(GameManager.players[i].name, i)
-
 
 func _on_start_game_button_down():
+	GameManager.send_player_information(GameManager.player_info("Bot", -1),  -1)	
+	GameManager.send_player_information(GameManager.player_info("Bot", -2),  -2)
 	start_game.rpc()

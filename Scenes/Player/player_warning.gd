@@ -13,8 +13,6 @@ func _process(_delta):
 	if get_parent().name == str(multiplayer.get_unique_id()):
 		return
 	
-	if multiplayer.get_unique_id() != 1:
-		return
 		
 	var canvas = get_canvas_transform()
 	var top_left = -canvas.origin / canvas.get_scale()

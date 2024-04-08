@@ -1,16 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlstynjwd686u"]
+[gd_scene load_steps=10 format=3 uid="uid://dlstynjwd686u"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/multiplayer_map.gd" id="1_37nnk"]
 [ext_resource type="PackedScene" uid="uid://dpqrj4pj7e4k6" path="res://Scenes/HUD/HUD.tscn" id="2_2lx4d"]
 [ext_resource type="PackedScene" uid="uid://d0m5vgs2sphwx" path="res://Scenes/Player/PlayerUI.tscn" id="2_ucnk3"]
 [ext_resource type="PackedScene" uid="uid://dodelwthvhjyd" path="res://Scenes/Player/player.tscn" id="2_uw17n"]
+[ext_resource type="PackedScene" uid="uid://mlx05oic3r1i" path="res://Scenes/Player/bot_player_controller.tscn" id="3_0wlxl"]
 [ext_resource type="PackedScene" uid="uid://e122pjl84qx2" path="res://Scenes/explosion/area_test.tscn" id="3_00yd4"]
 [ext_resource type="PackedScene" uid="uid://b0u046j1i4kon" path="res://Scenes/PowerUPs/pu_bullet.tscn" id="4_oqmxt"]
 [ext_resource type="PackedScene" uid="uid://bepavqgt37mix" path="res://Scenes/Levels/BGs/StarBackground.tscn" id="6_6w4pm"]
+[ext_resource type="PackedScene" uid="uid://c4bd2hq4ahvdl" path="res://Scenes/Levels/objects/meteour_Score.tscn" id="8_hb5r0"]
 
 [node name="MultiplayerMap" type="Node2D"]
 script = ExtResource("1_37nnk")
 PlayerScene = ExtResource("2_uw17n")
+BotScene = ExtResource("3_0wlxl")
 UIScene = ExtResource("2_ucnk3")
 BombScene = ExtResource("3_00yd4")
 
@@ -25,9 +28,6 @@ position = Vector2(960, 272)
 [node name="2" type="Node2D" parent="Spawns" groups=["spawns_points"]]
 position = Vector2(310, 466)
 
-[node name="Hud" parent="." instance=ExtResource("2_2lx4d")]
-script = null
-
 [node name="pu_bullet" parent="." instance=ExtResource("4_oqmxt")]
 position = Vector2(131, 234)
 scale = Vector2(0.3, 0.3)
@@ -39,3 +39,8 @@ position = Vector2(289, 235)
 position = Vector2(709, 230)
 
 [node name="StarBackground" parent="." instance=ExtResource("6_6w4pm")]
+
+[node name="Hud" parent="." instance=ExtResource("2_2lx4d")]
+
+[node name="Meteour" parent="." groups=["objective"] instance=ExtResource("8_hb5r0")]
+position = Vector2(3445, 402)

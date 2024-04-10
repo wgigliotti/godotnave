@@ -58,7 +58,7 @@ offset_left = 250.0
 offset_top = 68.0
 offset_right = 574.0
 offset_bottom = 99.0
-text = "127.0.0.1"
+text = "18.231.39.54"
 
 [node name="hostLabel" type="Label" parent="."]
 layout_mode = 0

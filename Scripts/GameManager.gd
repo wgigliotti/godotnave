@@ -5,12 +5,19 @@ var players = {}
 var player
 var id
 
+var dedicated_server = false
+
+var ping_time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if "--server" in OS.get_cmdline_args():
+		dedicated_server = true
+	
 
-
+func is_dedicated_server():
+	return dedicated_server
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -53,9 +60,19 @@ func player_info(mname, id):
 			"id": id,
 			"score": 0
 		}
-	
+		
+
 @rpc("any_peer")
 func send_player_information(player_info, id):
 	GameManager.players[id] = player_info
 		
 	update_players()
+	
+@rpc("any_peer")
+func ping(start):
+	var from = multiplayer.get_remote_sender_id()
+	pong.rpc_id(from, start)	
+	
+@rpc("any_peer")
+func pong(start):
+	ping_time = Time.get_ticks_msec() - start

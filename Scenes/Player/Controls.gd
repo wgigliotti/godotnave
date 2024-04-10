@@ -29,7 +29,7 @@ func _process(_delta):
 		left = -backward_potency
 		
 	if LeftKey != "" and Input.is_action_pressed(LeftKey):
-		left = 1
+		left = Input.get_action_strength(LeftKey)
 		
 	#left = 1 if Input.is_action_pressed(LeftKey) else 0
 	#left = -1 if Input.is_action_pressed(LeftReverseKey) else left
@@ -39,7 +39,7 @@ func _process(_delta):
 	if RightReverseKey != "" and Input.is_action_pressed(RightReverseKey):
 		right = -backward_potency
 	if RightKey != "" and Input.is_action_pressed(RightKey):
-		right = 1
+		right = Input.get_action_strength(RightKey)
 	
 func to_left(direction : bool = true):	
 	right = 0

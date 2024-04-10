@@ -16,20 +16,19 @@ func createBot(player):
 	add_child(bot)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	var index = 0	
+		
 	for i in GameManager.players:
 		
 		var currentPlayer = GameManager.create_player(PlayerScene, UIScene, self, i)
 		
-		if GameManager.players[i].name == "Bot":
+		if GameManager.players[i].name.begins_with("Bot"):
 			createBot(currentPlayer)
 		
-		for spawn in get_tree().get_nodes_in_group("spawns_points"):
-			if spawn.name == str(index):				
-				currentPlayer.global_position = spawn.global_position
-				
-		index += 1
+		var pos = Vector2.UP.rotated(randf_range(-PI, PI))* 25000
+		currentPlayer.global_position = pos
+		
+	if GameManager.is_dedicated_server():
+		$Hud.queue_free()
 			
 	
 

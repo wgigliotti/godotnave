@@ -4,6 +4,8 @@ extends Control
 
 @export var SceneMap: PackedScene
 
+@export var bots: int
+
 var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,7 +13,19 @@ func _ready():
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
-	pass # Replace with function body.
+	
+	for argument in OS.get_cmdline_args():
+		if argument.begins_with("--bots"):
+			var key_value = argument.split("=")
+			bots = key_value[1].int()
+	
+	if OS.has_environment("USERNAME"):
+		$nameLine.text = OS.get_environment("USERNAME")
+	else:
+		$nameLine.text = "Player " + str(randi_range(1, 200))
+	
+	if GameManager.is_dedicated_server():
+		host()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,7 +45,7 @@ func peer_connected(id):
 func peer_disconnected(id):
 	print("Player disconnected " + str(id))
 
-func _on_host_button_down():
+func host():
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(port, 2)
 	
@@ -44,6 +58,8 @@ func _on_host_button_down():
 	multiplayer.set_multiplayer_peer(peer)
 	print("Waiting for players")
 	
+func _on_host_button_down():
+	host()	
 	GameManager.send_player_information(GameManager.player_info($nameLine.text, multiplayer.get_unique_id()),  multiplayer.get_unique_id())	
 
 func _on_join_button_down():
@@ -60,8 +76,15 @@ func start_game():
 		get_tree().root.add_child(scene)
 		self.hide()
 
-
-func _on_start_game_button_down():
-	GameManager.send_player_information(GameManager.player_info("Bot", -1),  -1)	
-	GameManager.send_player_information(GameManager.player_info("Bot", -2),  -2)
+@rpc("any_peer")
+func server_start():
+	for n in bots:
+		GameManager.send_player_information(GameManager.player_info("Bot %d" % n , -n),  -n)	
+		
 	start_game.rpc()
+		
+func _on_start_game_button_down():
+	if multiplayer.is_server():
+		server_start()
+	else:
+		server_start.rpc_id(1)

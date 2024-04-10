@@ -64,19 +64,19 @@ func do_mark(bounds : Rect2):
 	#print(intersect)
 
 func drawUP(bounds : Rect2, pos : Vector2):
-	sprite.global_position = pos
+	sprite.global_position = pos + Vector2(0, 10)
 
 func drawLeft(bounds : Rect2, vct : Vector2, center : Vector2):
 	var pos = Geometry2D.line_intersects_line(bounds.position, Vector2(0, bounds.size.y), center, vct)
-	sprite.global_position = pos
+	sprite.global_position = pos + Vector2(10, 0)
 	
 func drawRight(bounds : Rect2, vct : Vector2, center : Vector2):
 	var pos = Geometry2D.line_intersects_line(bounds.position + Vector2(bounds.size.x,0), Vector2(0, bounds.size.y), center, vct)
-	sprite.global_position = pos
+	sprite.global_position = pos + Vector2(-10, 0)
 	
 func drawDown(bounds : Rect2, vct : Vector2, center : Vector2):
 	var pos = Geometry2D.line_intersects_line(bounds.position + Vector2(0,bounds.size.y), Vector2(bounds.size.x, 0), center, vct)
-	sprite.global_position = pos
+	sprite.global_position = pos + Vector2(0, -10)
 	
 func do_mark2(bounds : Rect2):
 	#if(bounds.has_point(global_position)):

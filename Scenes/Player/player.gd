@@ -5,10 +5,10 @@ extends RigidBody2D
 
 @onready var cannon_shoot = $CannonShoot
 
-var acceleration = 80000
+var acceleration = 160000
 
 var rotation_speed = 3.5
-var shoot_freq = 3
+var shoot_freq = 1
 
 var can_shoot = true
 var cannon_left = true
@@ -62,7 +62,7 @@ func _process(delta):
 	jet($Jets/LeftProp/Jet, $Controls.left, $Jets/LeftProp)
 	jet($Jets/RightProp/Jet, $Controls.right, $Jets/RightProp)
 	
-	var zoom = 1/(linear_velocity.length()/2000 + 1)
+	var zoom = (1/(linear_velocity.length()/2000 + 1))/2
 	$Camera2D.zoom = Vector2(zoom, zoom)
 	
 	if $Controls.shoot:

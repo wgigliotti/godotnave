@@ -22,7 +22,7 @@ func _process(delta):
 				update_score(object, delta*score/dist)
 				
 	if scored:
-		GameManager.update_players()
+		PlayerManager.update_players()
 		
 	if multiplayer.get_unique_id() == 1:
 		syncPosition = global_position

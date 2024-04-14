@@ -5,7 +5,7 @@ extends RigidBody2D
 
 @onready var cannon_shoot = $CannonShoot
 
-var acceleration = 160000
+var acceleration = 16000
 
 var rotation_speed = 3.5
 var shoot_freq = 1

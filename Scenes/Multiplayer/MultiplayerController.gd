@@ -3,30 +3,39 @@ extends Control
 @export var port = 8910
 
 @export var SceneMap: PackedScene
+@export var LobbyScene: PackedScene
+
 
 @export var bots: int
 
 var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	multiplayer.peer_connected.connect(peer_connected)
-	multiplayer.peer_disconnected.connect(peer_disconnected)
-	multiplayer.connected_to_server.connect(connected_to_server)
-	multiplayer.connection_failed.connect(connection_failed)
-	
-	for argument in OS.get_cmdline_args():
-		if argument.begins_with("--bots"):
-			var key_value = argument.split("=")
-			bots = key_value[1].int()
-	
 	if OS.has_environment("USERNAME"):
 		$nameLine.text = OS.get_environment("USERNAME")
 	else:
 		$nameLine.text = "Player " + str(randi_range(1, 200))
-	
-	if GameManager.is_dedicated_server():
-		host()
+		
+	if "--server" in OS.get_cmdline_args():
+		print("server mode")
+		var lobby = LobbyScene.instantiate()
+		lobby.is_host = true
+		get_tree().root.add_child.call_deferred(lobby)
+		self.hide()
+		
+		
+	# TODO BOTS
+	#for argument in OS.get_cmdline_args():
+		#if argument.begins_with("--bots"):
+			#var key_value = argument.split("=")
+			#bots = key_value[1].int()
+			
+	if multiplayer.is_server():
+		PlayerManager.players_connected.connect(players_connected)
 
+func players_connected():
+	start_game.rpc()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -45,30 +54,22 @@ func peer_connected(id):
 func peer_disconnected(id):
 	print("Player disconnected " + str(id))
 
-func host():
-	peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(port, 2)
+
+func _on_host_button_down():	
+	var lobby = LobbyScene.instantiate()
+	lobby.is_host = true
+	PlayerManager.player_info = {"name" : $nameLine.text, "score": 0}
+	get_tree().root.add_child(lobby)
 	
-	if error  != OK:
-		print("Cannot Host")
-		return
-		
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	
-	multiplayer.set_multiplayer_peer(peer)
-	print("Waiting for players")
-	
-func _on_host_button_down():
-	host()	
-	GameManager.send_player_information(GameManager.player_info($nameLine.text, multiplayer.get_unique_id()),  multiplayer.get_unique_id())	
+	self.hide()
 
 func _on_join_button_down():
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client($hostLine.text, port)
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	multiplayer.set_multiplayer_peer(peer)
+	PlayerManager.server_ip = $hostLine.text
+	PlayerManager.player_info = {"name" : $nameLine.text, "score": 0}
+	var lobby = LobbyScene.instantiate()	
+	get_tree().root.add_child(lobby)
 	
-	pass # Replace with function body.
+	self.hide()
 
 @rpc("any_peer", "call_local")
 func start_game():

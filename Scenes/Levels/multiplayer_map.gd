@@ -17,17 +17,17 @@ func createBot(player):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 		
-	for i in GameManager.players:
+	for i in PlayerManager.players:
 		
 		var currentPlayer = GameManager.create_player(PlayerScene, UIScene, self, i)
 		
-		if GameManager.players[i].name.begins_with("Bot"):
+		if PlayerManager.players[i].name.begins_with("Bot"):
 			createBot(currentPlayer)
 		
 		var pos = Vector2.UP.rotated(randf_range(-PI, PI))* 25000
 		currentPlayer.global_position = pos
 		
-	if GameManager.is_dedicated_server():
+	if PlayerManager.is_dedicated_server():
 		$Hud.queue_free()
 			
 	

@@ -8,7 +8,7 @@ var player
 #	player = player_to_set
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	createLabels(GameManager.players.values())
+	createLabels(PlayerManager.players.values())
 	
 #	var id = multiplayer.get_unique_id()
 #	player = GameManager.players[id].ship
@@ -18,7 +18,7 @@ func _ready():
 func _process(delta):
 	$deltaLabel.text = "Delta: " + str(delta)
 	$acceleration.text = str(GameManager.player.shoot_freq)
-	$scoreLabel.text = "Score: " + str(GameManager.getCurrentPlayerInfo().score)	
+	$scoreLabel.text = "Score: " + str(PlayerManager.player_info.score)	
 
 
 func _on_refresh_score_timeout():
@@ -26,13 +26,15 @@ func _on_refresh_score_timeout():
 		if child.is_in_group("score"):
 			child.queue_free()
 	
-	var players = GameManager.players.values()
+	var players = PlayerManager.players.values()
 	players.sort_custom(func(a, b): return a.score > b.score)
 	
 	createLabels(players)
 	
 func createLabels(players):
+	
 	for player in players:
+		print(str(player))
 		var score_lbl = Label.new()
 		
 		score_lbl.text = "%s: %d" % [player.name, player.score]

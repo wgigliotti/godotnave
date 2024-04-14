@@ -5,7 +5,7 @@ extends Control
 @export var SceneMap: PackedScene
 @export var LobbyScene: PackedScene
 
-
+var lobby
 @export var bots: int
 
 var peer
@@ -56,7 +56,7 @@ func peer_disconnected(id):
 
 
 func _on_host_button_down():	
-	var lobby = LobbyScene.instantiate()
+	lobby = LobbyScene.instantiate()
 	lobby.is_host = true
 	PlayerManager.player_info = {"name" : $nameLine.text, "score": 0}
 	get_tree().root.add_child(lobby)
@@ -66,15 +66,18 @@ func _on_host_button_down():
 func _on_join_button_down():
 	PlayerManager.server_ip = $hostLine.text
 	PlayerManager.player_info = {"name" : $nameLine.text, "score": 0}
-	var lobby = LobbyScene.instantiate()	
+	lobby = LobbyScene.instantiate()	
 	get_tree().root.add_child(lobby)
 	
 	self.hide()
 
 @rpc("any_peer", "call_local")
 func start_game():
+		
 		var scene = SceneMap.instantiate()
 		get_tree().root.add_child(scene)
+		lobby.hide()
+		lobby.queue_free()
 		self.hide()
 
 @rpc("any_peer")
@@ -83,6 +86,7 @@ func server_start():
 		GameManager.send_player_information(GameManager.player_info("Bot %d" % n , -n),  -n)	
 		
 	start_game.rpc()
+	
 		
 func _on_start_game_button_down():
 	if multiplayer.is_server():

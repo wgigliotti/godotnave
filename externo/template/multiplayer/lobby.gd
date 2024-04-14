@@ -12,8 +12,7 @@ func _ready():
 	else:
 		join() 
 	
-	PlayerManager.connection_ok.connect(connection_ok)
-	PlayerManager.players_connected.connect(players_connected)
+	PlayerManager.connection_ok.connect(connection_ok)	
 	
 
 func players_connected():

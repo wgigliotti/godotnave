@@ -77,14 +77,11 @@ func _process(_delta):
 	if multiplayer.is_server():		
 		if state == Status.PLAYER_JOINING and players.size() == lobby_size:
 			print("Multiplayer process server:" + str(players.size()))			
-			game_ready.rpc()
+			state = Status.READY
+			players_connected.emit()
 			
 			
-
-@rpc("any_peer", "call_local")
-func game_ready():
-	state = Status.READY
-	players_connected.emit()
+	
 	
 @rpc("any_peer")
 func send_player_information(player_info):
